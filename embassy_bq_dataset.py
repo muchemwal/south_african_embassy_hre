@@ -1,6 +1,10 @@
 from google.cloud import bigquery
 
-dataset = bigquery.Dataset(embasy_pipeline)
+client = bigquery.Client()
+
+dataset_id = "{}.embasy_pipeline".format(client.project)
+ 
+dataset = bigquery.Dataset(dataset_id)
 
 dataset.location = "US"
 
