@@ -1,6 +1,5 @@
-# South African Eembassy Harare Comments
-Scraping comments from South African Embasy Harare user experience and load into google BQ for visualuzation
-
+# South African Embassy Harare Comments
+Scraping comments from South African Embassy Harare's user experience and load into google BQ for visualuzation
 
 
 
