@@ -5,10 +5,13 @@ import requests
 import pandas
 from pandas import DataFrame
 import csv
+from google.cloud import bigquery
+
+client = bigquery.Client()
 
 #command to create a structure of csv file in which we will populate our scraped data
 
-with open('c:\\embasy\\South_Africa_Embasy_in_Harare.csv', mode='w') as csv_file:
+with open('c:\\netone\\South_Africa_Embasy_in_Harare.csv', mode='w') as csv_file:
     fieldnames = ['Title', 'Para', 'Author', 'Date']
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
@@ -58,5 +61,10 @@ data = {'Article_Title':article_title, 'Article_Para':article_para, 'Article_Aut
 
 df = DataFrame(data, columns = ['Article_Title','Article_Para','Article_Author','Article_Date','Page_No'])
 
+# write to BQ
+dataset_ref = client.dataset('embasy_pipeline')
+
+client.load_table_from_dataframe(df, dataset_ref)
+
 # To cv
-# df.to_csv(r'c:\\embasy\\South_Africa_Embasy_in_Harare.csv', quoting=csv.QUOTE_NONNUMERIC)
+#df.to_csv(r'c:\\netone\\South_Africa_Embasy_in_Harare.csv', quoting=csv.QUOTE_NONNUMERIC)
